@@ -7,3 +7,4 @@ class Events:
 
     def get_event_list(self, event_ids):
         return [self.eventbrite.get_event(e_id) for e_id in event_ids]
+                
