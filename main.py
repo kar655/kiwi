@@ -9,11 +9,10 @@ def main():
     events_manager = EventsManager()
     events = events_manager.get_all_events()
     
-    #events = give_recommendations(events, ["cars", "bmw", "mercedes"], TODO)
+    events = give_recommendations(events, ['car', 'dance'], None)
 
     print(events[0])
     print(len(events))
-    print(type(events))
 
 
 if __name__ == '__main__':

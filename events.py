@@ -5,9 +5,9 @@ from dacite import from_dict
 
 class Event:
     def __init__(self, data):
-        self.name = self.trycall(lambda _: data['name']['text'])
-        self.description = self.trycall(lambda _: data['description']['text'])
-        self.datetime = self.trycall(lambda _: data['start']['utc'])
+        self.name = self.trycall(lambda: data['name']['text'])
+        self.description = self.trycall(lambda: data['description']['text'])
+        self.datetime = self.trycall(lambda: data['start']['utc'])
 
     def trycall(self, func):
         try:
@@ -15,24 +15,9 @@ class Event:
         except Exception as e:
             return None
 
-# @dataclass
-# class Event:
-#     @dataclass
-#     class TextHtml:
-#         text: str
-#         html: str
+    def __str__(self):
+        return f'Event(name={self.name}, description={self.description}, datetime={self.datetime})'
 
-#     name: TextHtml
-#     description: TextHtml
-
-#     @dataclass
-#     class Timestamp:
-#         timezone: str
-#         local: str
-#         utc: str
-#     start: Timestamp
-#     end: Timestamp
-    
 
 class EventsManager:
     def __init__(self):
