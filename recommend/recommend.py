@@ -4,7 +4,7 @@ from events import Event
 from recommend.filters import Filters
 
 
-def give_recommendations(events: List[Event], search_keywords : List[str], date_range) -> List[Event]:
+def get_recommendations(events: List[Event], search_keywords : List[str], date_range) -> List[Event]:
     # Top-level function to be used to generate recommendations.
     # Other arguments are constraints to the filtering engine.
     events = Filters.by_date(events, date_range)
@@ -12,3 +12,5 @@ def give_recommendations(events: List[Event], search_keywords : List[str], date_
     return events
 
 
+# keywords 2 embeddings
+# extract keywords using GPT-2
