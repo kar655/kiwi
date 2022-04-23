@@ -1,5 +1,6 @@
 certifi==2021.10.8
 charset-normalizer==2.0.12
+dacite==1.6.0
 eventbrite==3.3.5
 idna==3.3
 requests==2.27.1
