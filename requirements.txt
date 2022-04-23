@@ -1,7 +1,12 @@
 certifi==2021.10.8
 charset-normalizer==2.0.12
+click==8.1.2
 dacite==1.6.0
 eventbrite==3.3.5
 idna==3.3
+joblib==1.1.0
+nltk==3.7
+regex==2022.3.15
 requests==2.27.1
+tqdm==4.64.0
 urllib3==1.26.9
