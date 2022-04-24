@@ -9,7 +9,7 @@ class Bert:
         # To generate:
         # model = SentenceTransformer('bert-base-nli-mean-tokens')
         # model.save('bert-model')
-        self.model = SentenceTransformer('./bert-model')
+        self.model = SentenceTransformer('./bert-model', device='cpu')
         self.model.eval()
 
     def encode(self, data: List[str]):

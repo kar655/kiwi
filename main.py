@@ -3,6 +3,7 @@ from events import EventsManager
 from pprint import pprint
 
 from recommend.bert import Bert
+from recommend.tokenize import clean_sentence
 from recommend.recommend import get_recommendations
 
 
@@ -11,7 +12,7 @@ def main():
     events_manager = EventsManager()
     events = events_manager.get_all_events()
 
-    names = np.array([evt.name + " " + evt.description for evt in events])
+    names = np.array([clean_sentence(evt.name + " " + evt.description) for evt in events])
 
     bert = Bert()
     names_encoded = bert.encode(names)
