@@ -6,8 +6,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 class Bert:
     def __init__(self):
-        self.model = SentenceTransformer('bert-base-nli-mean-tokens')
-        print("Bert is loaded")
+        # To generate:
+        # model = SentenceTransformer('bert-base-nli-mean-tokens')
+        # model.save('bert-model')
+        self.model = SentenceTransformer('./bert-model')
+        self.model.eval()
 
     def encode(self, data: List[str]):
         return self.model.encode(data)
@@ -16,4 +19,9 @@ class Bert:
         encoded = self.model.encode([sentence])
         predictions = np.array(
             sorted(enumerate(embedded), key=lambda x: cosine_similarity([x[1]], encoded), reverse=True))
+
+        # ???
+        scores = [cosine_similarity([embedding], encoded).tolist()[0][0] for embedding in predictions[:n, 1]]
+        print(scores)
+
         return np.array(predictions[:n, 0], dtype=int)

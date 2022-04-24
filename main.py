@@ -11,14 +11,13 @@ def main():
     events_manager = EventsManager()
     events = events_manager.get_all_events()
 
-    names = np.array([evt.name for evt in events])
+    names = np.array([evt.name + " " + evt.description for evt in events])
 
     bert = Bert()
     names_encoded = bert.encode(names)
     sentence = 'Programming'
     predictions = bert.top_predictions(sentence, names_encoded)
-    names_predicted = names[predictions]
-    pprint(names_predicted)
+    pprint([e for i, e in enumerate(events) if i in predictions])
 
     # events = give_recommendations(events, ['car', 'dance'], None)
 
