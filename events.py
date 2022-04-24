@@ -5,8 +5,8 @@ from typing import List
 class Event:
     def __init__(self, data):
         self.id = self.trycall(lambda: data['id'])
-        self.name = self.trycall(lambda: data['name']['text'])
-        self.description = self.trycall(lambda: data['description']['text'])
+        self.name = self.trycall(lambda: data['name']['text'].strip())
+        self.description = self.trycall(lambda: data['description']['text'].strip())
         self.datetime = self.trycall(lambda: data['start']['utc'])
 
     def trycall(self, func):
