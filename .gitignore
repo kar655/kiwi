@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 
 .idea/
+
+bert-model
+bert-model
