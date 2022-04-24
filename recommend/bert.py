@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 from typing import List
 from sentence_transformers import SentenceTransformer
@@ -6,10 +8,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 class Bert:
     def __init__(self):
-        # To generate:
-        # model = SentenceTransformer('bert-base-nli-mean-tokens')
-        # model.save('bert-model')
-        self.model = SentenceTransformer('./bert-model')
+        if 'bert-model' in os.listdir():
+            self.model = SentenceTransformer('./bert-model')
+        else:
+            self.model = SentenceTransformer('bert-base-nli-mean-tokens')
+            self.model.save('bert-model')
+
         self.model.eval()
 
     def encode(self, data: List[str]):
