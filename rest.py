@@ -25,6 +25,20 @@ names_encoded, bert = prepare_model()
 
 all_events = EventsManager().get_all_events()
 
+def event_data(evt):
+        return {
+            'id': evt.id,
+            'name': evt.name,
+            'description': evt.description,
+            'picture': evt.img_url,
+        }
+
+
+@app.route("/event/<int:eid>")
+def get_event(eid):
+    evts = list(filter(lambda e: e.id == eid, all_events))
+    return jsonify(event_data(evts[0]))
+
 @app.route("/recommend/", methods=['POST'])
 def recommend():
     data = request.get_json()
@@ -39,16 +53,9 @@ def recommend():
     events = [e for i, e in enumerate(all_events) if i in predictions]
     # events = get_recommendations(all_events, str.split(search_data) + str.split(preferences))
 
-    def event_data(evt):
-        return {
-            'id': evt.id,
-            'name': evt.name,
-            'description': evt.description,
-        }
-
     return jsonify({score: event_data(evt) for score, evt in enumerate(events)})
 
 #  curl -d '{"search_data": "car", "user_data":{"name":"Macius", "preferences":"horse", "events":""}}' -H "Content-Type: application/json" -X POST http://localhost:5000/recommend/
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
